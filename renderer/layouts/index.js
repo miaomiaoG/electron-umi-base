@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
 import Router from 'umi/router';
-import { UserOutlined, VideoCameraOutlined, FileTextOutlined } from '@ant-design/icons';
+import { UserOutlined, VideoCameraOutlined, FileTextOutlined,BorderOuterOutlined } from '@ant-design/icons';
 import styles from './index.less';
 
 import logo from '@/assets/logo.svg';
@@ -38,6 +38,9 @@ class BasicLayout extends React.Component {
             </Menu.Item>
             <Menu.Item key="/page2" icon={<VideoCameraOutlined />}>
               page2
+            </Menu.Item>
+            <Menu.Item key="/page3" icon={<BorderOuterOutlined />}>
+              page3
             </Menu.Item>
             <Menu.Item key="/docs" icon={<FileTextOutlined />}>
               文档
