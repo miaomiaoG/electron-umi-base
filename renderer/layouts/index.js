@@ -39,9 +39,6 @@ class BasicLayout extends React.Component {
             <Menu.Item key="/page2" icon={<VideoCameraOutlined />}>
               page2
             </Menu.Item>
-            <Menu.Item key="/page3" icon={<BorderOuterOutlined />}>
-              page3
-            </Menu.Item>
             <Menu.Item key="/docs" icon={<FileTextOutlined />}>
               文档
             </Menu.Item>

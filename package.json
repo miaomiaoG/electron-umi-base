@@ -39,7 +39,7 @@
     "devtron": "^1.4.0",
     "dva": "^2.6.0-beta.6",
     "electron": "^8.2.5",
-    "electron-builder": "^22.6.0",
+    "electron-builder": "^22.6.1",
     "electron-builder-squirrel-windows": "^22.6.1",
     "electron-debug": "^3.0.1",
     "electron-devtools-installer": "^3.0.0",
