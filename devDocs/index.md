@@ -86,7 +86,7 @@
    npm run start:renderer
 ```
 
-然后启动主进程
+- 然后启动主进程
 
 ```javascript
    npm run start:main
