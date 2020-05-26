@@ -54,10 +54,9 @@
 
 - 组件库使用 [Ant Design](https://ant.design/components/button-cn/)，已配置完成，可直接根据文档，引入相关组件，并参考文档进行使用
 
+## 环境搭建
 
-### 环境搭建
-
-#### 安装
+### 安装
 
 通过npm下载依赖  
 **请确保node版本 >10**(推荐使用 [nvm](https://github.com/nvm-sh/nvm) 管理node)
@@ -68,7 +67,7 @@
    npm install
 ```
 
-##### 开发
+### 开发
 
 - 同时启动
 
@@ -93,7 +92,7 @@
    npm run start:main
 ```
 
-##### 依赖包安装
+### 依赖包安装
 
 注意：**仅在生产环境依赖的包安装在 dependencies 下**
 
@@ -111,11 +110,11 @@ npm install package-name  --save
 npm install package-name --save-dev  // 开发环境包
 ```
 
-##### 如何使用node的api
+### 如何使用node的api
 
 node的api不参与react编译，需要在 `renderer/public/window_node_api.js` 中引入相关的api，并挂载到window下，即可在react中使用
 
-#### 数据请求
+### 数据请求
 
 - http请求：
 使用 `axios`,前端、node环境均可使用，`renderer/utils/request.js` 中进行了简单前端的统一请求配置
@@ -128,21 +127,21 @@ node的api不参与react编译，需要在 `renderer/public/window_node_api.js` 
 
 当然，在前端环境中，也可以直接使用浏览器标准的 Websocket 接口，文档参考 [WebSocket](https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket)
 
-##### 如何拓展devtools插件
+### 如何拓展devtools插件
 
 通过 `electron-devtools-installer`库安装
 在 `development`环境下，已默认安装 react-devtools 和 redux-devtools ; 如需要其它插件，可在文件 `main/utils/installlDevtoolExt.js` 中增加
 文档参考： [electron-devtools-installer](https://github.com/MarshallOfSound/electron-devtools-installer)
 
-### 项目打包
+## 项目打包
 
-#### 构建测试包
+### 构建测试包
 
 ```ssh
 npm run pack   // 仅输出包,方便测试
 ```
 
-#### 构建安装包
+### 构建安装包
 
 1. 执行前端资源打包
 
@@ -160,11 +159,11 @@ npm run dist-linux // linux包
 npm run dist-all   // 所有平台包
 ```
 
-#### 打包后的客户端版本
+### 打包后的客户端版本
 
 和 `package.json` 中的 `version` 属性一致，**正式打包前，请更新 `version` 值**
 
-#### 打包配置说明 [`electron-builder.config.js`](./electron-builder.config.js)
+### 打包配置说明 [`electron-builder.config.js`](./electron-builder.config.js)
 
 单独抽出了js配置文件，在使用时通过 `--config` 参数指定，如： `electron-builder --config ./electron-builder.config.js`
 
@@ -174,7 +173,7 @@ npm run dist-all   // 所有平台包
 
 [category-Mac分类参考](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html#//apple_ref/doc/uid/TP40009250-SW8)
 
-### 客户端更新
+## 客户端更新
 
 - 没有包管理服务器
 
