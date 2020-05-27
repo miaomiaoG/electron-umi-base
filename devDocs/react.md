@@ -214,4 +214,87 @@ render() {
   
     `snapshot` 参数不常用
 
-## 事件绑定及注意事项
+## 事件处理
+
+React 元素的事件处理和 DOM 元素的很相似，但是有一点语法上的不同：
+
+- React 事件的命名采用小驼峰式（camelCase），而不是纯小写。
+- 使用 JSX 语法时你需要传入一个函数作为事件处理函数，而不是一个字符串。
+  
+与传统html事件处理对比
+
+```js
+// 传统html
+<button onclick="increase()">
+  increase count
+</button>
+// react 中
+<button onClick={increase}>
+  increase count
+</button>
+```
+
+1. 一个 `react` 中事件处理例子，下面代码中，每次点击按钮都会使span标签中的数字加1：
+
+    ```js
+    class Demo extends React.PureComponent {
+
+      constructor(props) {
+        super(props);
+        this.state = {
+          count: 0,
+        }
+      }
+
+      increase = () => {
+        this.setState({ count: this.state.count + 1 });
+      }
+
+      render() {
+        return (
+          <div>
+            <span>{this.state.count}</span>
+            <button onClick={this.increase}>increase</button>
+          </div>
+        )
+      }
+    }
+    ```
+
+2. 如何像事件处理程序传参
+
+    ```js
+    <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
+    <button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
+    ```
+
+    `e 是一个合成事件。React 根据 W3C 规范来定义这些合成事件`
+
+### 注意事项
+
+- 在 `react` 中不能通过返回 `false` 的方式阻止默认行为，必须显示的使用 `preventDefault`
+  
+  ```js
+  // 传统html
+  <a href="#" onclick="console.log('The link was clicked.'); return false">
+    Click me
+  </a>
+  // react(函数组件)
+  function ActionLink() {
+    function handleClick(e) {
+      e.preventDefault();
+      console.log('The link was clicked.');
+    }
+
+    return (
+      <a href="#" onClick={handleClick}>
+        Click me
+      </a>
+    );
+  }
+  ```
+
+- `this` 指向问题
+  
+  `class` 的方法默认不会绑定 this。如果你忘记绑定 `this.handleClick` 并把它传入了 `onClick`，当你调用这个函数的时候 `this` 的值为 `undefined`。因此通常我们都使用箭头函数来处理事件函数，箭头函数默认将当前类的 `this` 绑定到了函数上
+

@@ -1,5 +1,5 @@
 import React from 'react'; // react项目页面必须要引入的库
-import {Button} from 'antd';
+import { Button } from 'antd';
 import Welcome from './Welcome';
 
 // 定义页面类并导出（一定要export，否则路由页面无法引用该页面内容）
@@ -9,19 +9,24 @@ export default class Demo extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'minieye'
+      name: 'minieye',
+      count: 0,
     }
   }
 
   componentDidMount() {
-   /*  let count = 0;
-    this.timer = setInterval(() => {
-      console.log(count++);
-    }, 1000); */
+    /*  let count = 0;
+     this.timer = setInterval(() => {
+       console.log(count++);
+     }, 1000); */
   }
 
   componentWillUnmount() {
     // clearInterval(this.timer)
+  }
+
+  increase = () => {
+    this.setState({ count: this.state.count + 1 });
   }
 
 
@@ -41,7 +46,11 @@ export default class Demo extends React.PureComponent {
         </ul>
         <Button type="primary">this is a button</Button>
         {/* <p>test</p> */}
-        <Welcome name="minieye"/>
+        <Welcome name="minieye" />
+        <div>
+        <span>{this.state.count}</span>
+        <Button onClick={this.increase}>increase</Button>
+        </div>
       </div>
     )
   }
