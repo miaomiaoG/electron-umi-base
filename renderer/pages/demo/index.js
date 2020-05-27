@@ -1,4 +1,6 @@
 import React from 'react'; // react项目页面必须要引入的库
+import {Button} from 'antd';
+import Welcome from './Welcome';
 
 // 定义页面类并导出（一定要export，否则路由页面无法引用该页面内容）
 console.log('out of demo class')
@@ -12,14 +14,14 @@ export default class Demo extends React.PureComponent {
   }
 
   componentDidMount() {
-    let count = 0;
+   /*  let count = 0;
     this.timer = setInterval(() => {
       console.log(count++);
-    }, 1000);
+    }, 1000); */
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer)
+    // clearInterval(this.timer)
   }
 
 
@@ -37,7 +39,9 @@ export default class Demo extends React.PureComponent {
             array.map(item => <li key={item}>{item}</li>)
           }
         </ul>
+        <Button type="primary">this is a button</Button>
         {/* <p>test</p> */}
+        <Welcome name="minieye"/>
       </div>
     )
   }
