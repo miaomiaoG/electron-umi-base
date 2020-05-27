@@ -77,3 +77,67 @@ eg:
 - `[demo]` - 菜单元素的name
 
 `至此，完成上述三个步骤后，就已经成功添加了一个可访问的新页面，可以在页面上看到 demo 菜单项，点击后容器中会渲染出 demo 页面的内容`
+
+## 了解一下 react
+
+[传送门](react.md)
+
+## 组件开发及使用
+
+在开始这部分之前，请先对 [react](react.md) 进行粗略的了解
+
+### ant design 的使用
+
+本系统的基础组件库使用的是阿里的 [ant design](https://ant.design/index-cn) ，大多数使用频率较高的组件都可以在这个库里面找到，比如 `Button`, `Table`, `Modal`，使用时只需要在文件中引入相关的组件即可，
+eg：在 React 中使用 `antd` 组件
+
+```jsx
+//...
+import {Button} from 'antd'; // 从 antd 组件库引入需要使用的组件
+
+class Demo extends React.PureComponent{
+  render() {
+    return (
+      <div>
+        <Button type="primary">this is a button</Button>
+      </div>
+    )
+  }
+}
+```
+
+### 自定义组件及使用
+
+如果页面或者系统有组件可以拆分出来时，可以自己定义一个组件，并在页面中使用。
+对于系统中可能多次会使用到的组件请在 `renderer/components/` 文件夹下新建文件夹，并创建自己的组件，eg：`renderer/components/Markdown`，这是一个系统通用的 markdown 容器组件。
+如果是提取的一个页面的组件，最后只在某个页面中使用的组件请在页面所在的文件夹下 `renderer/pages/demo/` 创建组件，分离出来的组件较多时，可以在该文件夹下创建 `components` 文件夹用来放置所有当前页面的所有组件
+eg:
+在demo文件夹下创建组件 `Welcome`
+
+```jsx
+import React from 'react';
+export default class Welcome extends React.PureComponent{
+  render(){
+    return(
+    <div>Welcome {this.props.name}</div>
+    )
+  }
+}
+```
+
+在demo页面使用 `Welcome` 组件
+
+```jsx
+import React from 'react'; // react项目页面必须要引入的库
+import Welcome from './Welcome';
+
+export default class Demo extends React.PureComponent {
+  render() {
+    return (
+      <div>
+        <Welcome name="minieye"/>
+      </div>
+    )
+  }
+}
+```
