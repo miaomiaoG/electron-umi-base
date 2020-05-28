@@ -1,5 +1,9 @@
 # 前端基于 umi 框架的开发
 
+## 了解React
+
+ [传送门](react.md)
+
 ## 创建新页面流程
 
 ### 1. 创建页面文件
@@ -8,7 +12,7 @@
 
 1. 在页面文件夹位置下创建一个新的文件夹，eg：`/renderer/pages/demo/`（文件夹的命名建议与路由名一致或相关，方便快速定位文件），文件夹以页面为单位，每个页面创建一个文件夹，`demo` 文件夹下的所有文件都是与 page1 页面相关的文件（入口js，样式文件，子页面文件，当前页面独有的组件等）
 
-2. 在第`1`步建好的文件夹下创建入口js文件（index.js），eg:`/renderer/pages/demo/index.js` ，是路由配置中需要引用的文件，入口文件中需要有以下代码（一个页面就是一个组件类）
+2. 在第`1`步建好的文件夹下创建页面入口 `js` 文件（eg:index.js），eg:`/renderer/pages/demo/index.js` ，该文件是路由配置中需要引用的文件，入口文件中需要有以下代码（一个页面就是一个 `class` 组件）
 
     ```jsx
     import React from 'react'; // react项目页面必须要引入的库
@@ -78,11 +82,7 @@ eg:
 
 `至此，完成上述三个步骤后，就已经成功添加了一个可访问的新页面，可以在页面上看到 demo 菜单项，点击后容器中会渲染出 demo 页面的内容`
 
-## 了解一下 react
-
-[传送门](react.md)
-
-## 组件开发及使用
+## 组件使用及开发
 
 在开始这部分之前，请先对 [react](react.md) 进行粗略的了解
 
@@ -99,6 +99,7 @@ class Demo extends React.PureComponent{
   render() {
     return (
       <div>
+        {/* 使用 antd Button 组件 */}
         <Button type="primary">this is a button</Button>
       </div>
     )
@@ -138,6 +139,121 @@ export default class Demo extends React.PureComponent {
         <Welcome name="minieye"/>
       </div>
     )
+  }
+}
+```
+
+## 给页面添加样式
+
+在页面文件夹（eg：`renderer/pages/demo/`）下新建样式文件，本系统使用 `css` 预处理器 [less](http://lesscss.org/) 来编写样式文件，使用 [css modules]() 的方式来使用样式。
+`less` 文件
+
+```less
+// less
+@initialFont:18px; // less 变量
+
+.demoPage{
+  padding: 10px;
+  .increaseBtn{
+    font-size: @initialFont; // less 变量使用
+  }
+}
+
+// 等价于下面的css
+/* css 变量 */
+--initialFont: 18px;
+.demoPage{
+  padding: 10px;
+}
+.demoPage .increaseBtn{
+  /* css 变量使用 */
+  font-size: var(--initialFont);
+}
+```
+
+js文件中引用样式
+
+```jsx
+// import './index.less'; // 非CSS Modules
+import styles from './index.less' //  CSS Modules
+
+// ... Demo class
+
+render(){
+  return(
+    // <div className="demoPage">
+    <div className={styles.demoPage}>
+      Hello minieye
+      <button classNmae={styles.increaseBtn}>increase</button>
+    </div>
+  )
+}
+```
+
+`如何使用内联样式（不推荐）`
+在 `React` 中使用内联样式与传统html不太一样，`react` 中 `style` 属性的值接受一个对象，并将多单词的样式属性改为驼峰写法。选择器请避免使用 `id` 选择器，尽可能的使用类选择器等
+
+```jsx
+// react
+// ... Demo class
+render(){
+  return(
+    <div style={{padding: 10,margin: 10}}>
+      <button style={{fontSize: 18}}>increase</button>
+    </div>
+  )
+}
+// or
+render(){
+  const commonStyle = {
+    padding: 10,
+    margin: 10,
+  }
+  return(
+    <div style={commonStyle}>
+      <button style={{fontSize: 18}}>increase</button>
+    </div>
+  )
+}
+// 传统html
+<div style="padding: 10px;margin:10px">
+  <button style="font-size: 18px">increase</button>
+</div>
+```
+
+`修改第三方组件样式`
+
+如果再使用第三方组件库时，对样式有修改的需求，但同时不希望这个修改影响到其他页面。比如再使用 ant design 的组件时，需要修改某些样式。
+eg：修改 `Card` 组件的头部内间距
+
+`js` 文件
+
+```jsx
+import {Card} from 'antd'
+import styles from './index.less' //  CSS Modules
+
+// ... Demo class
+render(){
+  return(
+    <div className={styles.demoPage}>
+      <Card title="card title" className={styles.myCard}>
+        Card content
+      </Card>
+    </div>
+  )
+}
+```
+
+样式文件（index.less）
+
+```jsx
+.demoPage{
+  .myCard{
+    :global{
+      .ant-card-head{
+        padding: 10px;
+      }
+    }
   }
 }
 ```

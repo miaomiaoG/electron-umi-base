@@ -1,0 +1,15 @@
+@initialFont:18px; // less 变量
+
+.demoPage{
+  padding: 10px;
+  .increaseBtn{
+    font-size: @initialFont; 
+  }
+  .myCard{
+    :global{
+      .ant-card-head{
+        padding: 10px;
+      }
+    }
+  }
+}

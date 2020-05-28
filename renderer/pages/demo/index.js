@@ -1,9 +1,9 @@
 import React from 'react'; // react项目页面必须要引入的库
-import { Button } from 'antd';
+import { Button,Card } from 'antd';
 import Welcome from './Welcome';
+import styles from './index.less';
 
 // 定义页面类并导出（一定要export，否则路由页面无法引用该页面内容）
-console.log('out of demo class')
 export default class Demo extends React.PureComponent {
 
   constructor(props) {
@@ -35,7 +35,7 @@ export default class Demo extends React.PureComponent {
     const array = [1, 2, 3, 4, 5];
 
     return (
-      <div>
+      <div className={styles.demoPage}>
         hello, {this.state.name}!  {/* 使用定义的变量 */}
         <ul>
           {
@@ -49,8 +49,11 @@ export default class Demo extends React.PureComponent {
         <Welcome name="minieye" />
         <div>
         <span>{this.state.count}</span>
-        <Button onClick={this.increase}>increase</Button>
+        <Button onClick={this.increase} className={styles.increaseBtn}>increase</Button>
         </div>
+        <Card title="card title" className={styles.myCard}>
+          Card Content
+        </Card>
       </div>
     )
   }

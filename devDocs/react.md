@@ -296,5 +296,23 @@ React 元素的事件处理和 DOM 元素的很相似，但是有一点语法上
 
 - `this` 指向问题
   
-  `class` 的方法默认不会绑定 this。如果你忘记绑定 `this.handleClick` 并把它传入了 `onClick`，当你调用这个函数的时候 `this` 的值为 `undefined`。因此通常我们都使用箭头函数来处理事件函数，箭头函数默认将当前类的 `this` 绑定到了函数上
+  `class` 的方法默认不会绑定 this。如果你忘记绑定 `this.handleClick` 并把它传入了 `onClick`，当你调用这个函数的时候 `this` 的值为 `undefined`。因此通常我们都使用箭头函数来处理事件函数，箭头函数默认将当前类的 `this` 绑定到了函数上。
+  在 `class` 组件中，用默认方法处理之间函数时，也可以通过 `this` 绑定将 `this` 传入函数，这一步在 `constructor` 中进行，eg：
 
+  ```jsx
+  // Demo class
+  constructor(props) {
+    super(props);
+    // 为了在回调中使用 `this`，这个绑定是必不可少的
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(){
+    // 普通函数（非箭头函数事件处理需要绑定this）
+  }
+
+  render(){
+    return <a onClick=(this.handleClick)>Click me</a>
+  }
+  ```
+  
