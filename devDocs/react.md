@@ -136,6 +136,7 @@ render() {
 ## React 常用生命周期函数（只有 class 组件有，函数组件没有生命周期函数）
 
 1. `constructor`
+
     如果不初始化 `state` 或不进行方法绑定，则不需要为 React 组件实现构造函数。
     在 React 组件挂载之前，会调用它的构造函数。在为 React.Component 子类实现构造函数时，应在其他语句之前前调用 `super(props)`。否则，`this.props` 在构造函数中可能会出现未定义的 bug。eg：
 
@@ -147,10 +148,12 @@ render() {
     }
     ```
 
-    只能在构造函数中直接为 `this.state` 赋值。如需在其他方法中赋值，你应使用 `this.setState()` 替代。
+    只能在构造函数中直接为 `this.state` 赋值。如需在其他方法中赋值，请使用 `this.setState()` 替代。
 
 2. `render()`
+
     `render()`方法是 clas 组件中唯一一个必须实现的方法
+
     render 函数被调用时，会检查 `this.props` 和 `this.state` 的变化并返回以下之一：
 
      - React 元素：`<Welcome/>`，`<div/>`
@@ -169,6 +172,7 @@ render() {
     ```
 
 3. `componentDidMount()`
+
     在组件已经被渲染到 DOM 中后运行，首次 render 后调用，可以这这一部分进行数据的获取、绑定事件、初始化、添加计时器等操作
     依赖于 DOM 节点的初始化应该放在这里。如需通过网络请求获取数据，此处是实例化请求的好地方。
     这个方法是比较适合添加订阅的地方。如果添加了订阅，请不要忘记在 `componentWillUnmount()` 里取消订阅
@@ -190,6 +194,7 @@ render() {
     ```
 
 4. `componentWillUnmount()`
+
     组件卸载时要进行的操作，解绑事件、删除实例、清除计时器等
 
     ```jsx
@@ -201,6 +206,7 @@ render() {
     ```
 
 5. `componentDidUpdate(prevProps, prevState, snapshot)`
+
     会在更新后会被立即调用，当组件更新后，可以在此处对 DOM 进行操作。如果你对更新前后的 props 进行了比较，也可以选择在此处进行网络请求。（例如，当 props 未发生变化时，则不会执行网络请求）eg:
 
     ```jsx
@@ -247,6 +253,7 @@ React 元素的事件处理和 DOM 元素的很相似，但是有一点语法上
       }
 
       increase = () => {
+        // 使用箭头函数避免出现 this 指向问题
         this.setState({ count: this.state.count + 1 });
       }
 
@@ -261,7 +268,7 @@ React 元素的事件处理和 DOM 元素的很相似，但是有一点语法上
     }
     ```
 
-2. 如何像事件处理程序传参
+2. 如何向事件处理程序传参
 
     ```js
     <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
@@ -315,4 +322,3 @@ React 元素的事件处理和 DOM 元素的很相似，但是有一点语法上
     return <a onClick=(this.handleClick)>Click me</a>
   }
   ```
-  

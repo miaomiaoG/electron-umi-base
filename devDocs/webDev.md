@@ -88,7 +88,8 @@ eg:
 
 ### ant design 的使用
 
-本系统的基础组件库使用的是阿里的 [ant design](https://ant.design/index-cn) ，大多数使用频率较高的组件都可以在这个库里面找到，比如 `Button`, `Table`, `Modal`，使用时只需要在文件中引入相关的组件即可，
+本系统的基础组件库使用的是阿里的 [ant design](https://ant.design/index-cn) ，大多数使用频率较高的组件都可以在这个库里面找到，比如 `Button`, `Table`, `Modal`，使用时只需要在文件中引入相关的组件即可
+
 eg：在 React 中使用 `antd` 组件
 
 ```jsx
@@ -112,8 +113,8 @@ class Demo extends React.PureComponent{
 如果页面或者系统有组件可以拆分出来时，可以自己定义一个组件，并在页面中使用。
 对于系统中可能多次会使用到的组件请在 `renderer/components/` 文件夹下新建文件夹，并创建自己的组件，eg：`renderer/components/Markdown`，这是一个系统通用的 markdown 容器组件。
 如果是提取的一个页面的组件，最后只在某个页面中使用的组件请在页面所在的文件夹下 `renderer/pages/demo/` 创建组件，分离出来的组件较多时，可以在该文件夹下创建 `components` 文件夹用来放置所有当前页面的所有组件
-eg:
-在demo文件夹下创建组件 `Welcome`
+
+eg:在demo文件夹下创建组件 `Welcome`
 
 ```jsx
 import React from 'react';
@@ -191,6 +192,7 @@ render(){
 ```
 
 `如何使用内联样式（不推荐）`
+
 在 `React` 中使用内联样式与传统html不太一样，`react` 中 `style` 属性的值接受一个对象，并将多单词的样式属性改为驼峰写法。选择器请避免使用 `id` 选择器，尽可能的使用类选择器等
 
 ```jsx
@@ -224,6 +226,7 @@ render(){
 `修改第三方组件样式`
 
 如果再使用第三方组件库时，对样式有修改的需求，但同时不希望这个修改影响到其他页面。比如再使用 ant design 的组件时，需要修改某些样式。
+
 eg：修改 `Card` 组件的头部内间距
 
 `js` 文件
