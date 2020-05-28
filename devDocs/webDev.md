@@ -146,7 +146,7 @@ export default class Demo extends React.PureComponent {
 
 ## 给页面添加样式
 
-在页面文件夹（eg：`renderer/pages/demo/`）下新建样式文件，本系统使用 `css` 预处理器 [less](http://lesscss.org/) 来编写样式文件，使用 [css modules]() 的方式来使用样式。
+在页面文件夹（eg：`renderer/pages/demo/`）下新建样式文件，本系统使用 `css` 预处理器 [less](http://lesscss.org/) 来编写样式文件，使用 [css modules](https://github.com/css-modules/css-modules) 的方式来使用样式。
 `less` 文件
 
 ```less
@@ -258,5 +258,80 @@ render(){
       }
     }
   }
+}
+```
+
+## 页面跳转
+
+如何从如何从当前页面跳转到指定页：
+
+1. `umi/link`
+
+    ```jsx
+    import Link from 'umi/link';
+    // to="[router中配置的要跳转到的页面路径]"
+    <Link to="/page2">
+      <Button>to page2</Button>
+    </Link>
+    ```
+
+2. `umi/router`
+
+    ```jsx
+    import router from 'umi/router';
+
+    toAnotherPage=()=>{
+      // 参数为 page2 的路由
+      // 需要通过js进行处理后再进行跳转时使用此方法，其他情况优先考虑第一种方法
+      router.push('/page2');
+    }
+
+    render(){
+      return(
+        <button onClick={this.toAnotherPage}>to page2</button>
+      )
+    }
+    ```
+
+## 数据请求
+
+前端使用 `Axios` 库，`/renderer/utils/request.js` 已经对对 `axios` 进行了简单的封装，使用时只需要引入该文件，调用相应的接口即可
+
+```js
+import axiosInstance from '@/utils/request';
+```
+
+数据请求建议在 `renderer/service` 文件夹下添加文件用来处理数据请求，然后再在页面文件中引入相应的数据请求，根据业务逻辑对数据进行进一步处理，文件以服务类别区分，比如所有跟用户相关的数据请求建议放在 `renderer/service/user.js` 中，与登录登出有关的放在 `renderer/service/login.js`， `service` 下的每个文件代表一类服务.
+
+eg:
+
+- `renderer/service/user.js`
+
+    ```js
+    export async function getApiUserInfo() {
+      return axiosInstance.get('/api/user/info');
+    }
+    ```
+
+- 使用
+  
+    ```js
+    import { getApiUserInfo } from '@/service/user'
+    // Demo class
+    componentDidmount(){
+      getApiUserInfo().then(data=>{
+        this.setSate({useInfo: data});
+      })
+    }
+    ```
+
+在页面文件中请求数据
+
+```jsx
+// Demo class
+componentDidmount(){
+  axiosInstance.get('api/list', params).then(data=>{
+    this.setState({list: data});
+  })
 }
 ```
