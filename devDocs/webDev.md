@@ -46,6 +46,7 @@ export default[{
     routes: [
       {
         path: '/demo',
+        // path: '/demo/:id', //带参路由
         component: './demo/index', // 具体页面内容
       },
 }]
@@ -147,6 +148,7 @@ export default class Demo extends React.PureComponent {
 ## 给页面添加样式
 
 在页面文件夹（eg：`renderer/pages/demo/`）下新建样式文件，本系统使用 `css` 预处理器 [less](http://lesscss.org/) 来编写样式文件，使用 [css modules](https://github.com/css-modules/css-modules) 的方式来使用样式。
+
 `less` 文件
 
 ```less
@@ -292,6 +294,27 @@ render(){
       )
     }
     ```
+
+3. `接收页面跳转时的参数`
+
+    `demo` 页的路由配置 `/demo/:id`
+
+    从 `page`页 携参数跳转至 `demo` 页
+
+    ```jsx
+    // page 页 js
+    router.push('/demo/123');
+
+    // Demo页 js 处理
+    constructor(props){
+      super(props);
+      this.state={
+        id: props.match.params.id,
+      }
+    }
+    ```
+
+    更多用法请移步 [umi路由](https://umijs.org/zh-CN/docs/routing)-路由组件参数部分
 
 ## 数据请求
 
