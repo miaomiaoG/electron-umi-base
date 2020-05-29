@@ -1,5 +1,5 @@
 import React from 'react'; // react项目页面必须要引入的库
-import { Button,Card } from 'antd';
+import { Button, Card } from 'antd';
 import router from 'umi/router';
 import Welcome from './Welcome';
 import styles from './index.less';
@@ -30,7 +30,7 @@ export default class Demo extends React.PureComponent {
     this.setState({ count: this.state.count + 1 });
   }
 
-  toAnotherPage=()=>{
+  toAnotherPage = () => {
     // 参数 page2 的路由
     router.push('/page2');
   }
@@ -53,8 +53,8 @@ export default class Demo extends React.PureComponent {
         {/* <p>test</p> */}
         <Welcome name="minieye" />
         <div>
-        <span>{this.state.count}</span>
-        <Button onClick={this.increase} className={styles.increaseBtn}>increase</Button>
+          <span>{this.state.count}</span>
+          <Button onClick={this.increase} className={styles.increaseBtn}>increase</Button>
         </div>
         <Card title="card title" className={styles.myCard}>
           Card Content

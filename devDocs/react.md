@@ -159,7 +159,7 @@ render() {
      - React 元素：`<Welcome/>`，`<div/>`
      - 字符串或数值类型： 在DOM中会被渲染为文本节点
      - 布尔类型或null： 什么都不渲染，主要用于`bool_test && <Welcome/>`,bool_test为true时渲染`Welcome/>`，否则什么都不渲染
-     - 数组或 [fragments](https://reactjs.org/docs/fragments.html)，[Portals](https://reactjs.org/docs/portals.html)（不常用）
+     - 数组或 [fragments](https://reactjs.org/docs/fragments.html)，[Portals](https://reactjs.org/docs/portals.html)（fragments不常用）
   
     render函数应该为纯函数，如果需要与浏览器进行交互，请在 `componentDidMount` 或者其他生命周期方法中进行
 
