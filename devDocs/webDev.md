@@ -303,13 +303,15 @@ render(){
 
     ```jsx
     // page 页 js
-    router.push('/demo/123');
+    router.push('/demo/123?name=minieye&age=7');
 
     // Demo页 js 处理
     constructor(props){
       super(props);
       this.state={
         id: props.match.params.id,
+        name:props.location.query.name,
+        age:props.location.query.age,
       }
     }
     ```
