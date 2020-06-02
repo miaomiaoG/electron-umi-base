@@ -13,6 +13,7 @@ render() {
     const array = [1, 2, 3, 4, 5];
     return (
       <div>
+        {/* <%= name > */}
         hello, {name}!  {/* 使用定义的变量 */}
         <ul>
           {
@@ -40,7 +41,7 @@ render() {
 
 `组件`，从概念上类似于 JavaScript 函数。它接受任意的入参（即 “props”），并返回用于描述页面展示内容的 React 元素。
 
-#### 函数组件与 clas 组件
+#### 函数组件与 class 组件
 
 定义组件的两种方式（两种方式定义的组件在React里是等效的）：
 
@@ -62,7 +63,7 @@ render() {
   }
   ```
 
-### 2. `porps`（ReadOnly）
+### 2. `props`（ReadOnly）
 
   当 React 元素为用户自定义组件时，它会将 JSX 所接收的属性（attributes）以及子组件（children）转换为单个对象传递给组件，这个对象被称之为 “props”。`props`是只读的，组件无论是使用函数声明还是通过 class 声明，都决不能修改自身的 props。eg：
 
@@ -84,12 +85,18 @@ render() {
   ```JSX
   class Demo extends React.PureComponent {
     state = {
-      name: 'minieye'
+      count: 0
     }
+
+    increase = () => {
+      this.setState({ count: this.state.count + 1 });
+    }
+
     render() {
       return (
         <div>
-          hello, {this.state.name}  {/* 使用state的值 */}
+          <p>{this.state.count}</p> {/* 使用state的值 */}
+          <Button onClick={this.increase} className={styles.increaseBtn}>increase</Button>
         </div>
       )
     }
@@ -102,7 +109,7 @@ render() {
 
   ```JSX
   // Wrong
-  this.state.name = 'minieye';
+  this.state.count = this.state.count + 1;
   ```
 
   必须通过 `setState()` 方法更新 state，整个组件中只能在 `constructor` 中对 `this.state` 进行赋值操作，其他任何地方更新 state 必须使用 `setState()`
@@ -135,6 +142,8 @@ render() {
 
 ## React 常用生命周期函数（只有 class 组件有，函数组件没有生命周期函数）
 
+[React 生命周期图谱](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+
 1. `constructor`
 
     如果不初始化 `state` 或不进行方法绑定，则不需要为 React 组件实现构造函数。
@@ -159,7 +168,7 @@ render() {
      - React 元素：`<Welcome/>`，`<div/>`
      - 字符串或数值类型： 在DOM中会被渲染为文本节点
      - 布尔类型或null： 什么都不渲染，主要用于`bool_test && <Welcome/>`,bool_test为true时渲染`Welcome/>`，否则什么都不渲染
-     - 数组或 [fragments](https://reactjs.org/docs/fragments.html)，[Portals](https://reactjs.org/docs/portals.html)（fragments不常用）
+     - 数组或 [Fragments](https://reactjs.org/docs/fragments.html)，[Portals](https://reactjs.org/docs/portals.html)（fragments不常用）
   
     render函数应该为纯函数，如果需要与浏览器进行交互，请在 `componentDidMount` 或者其他生命周期方法中进行
 
@@ -322,3 +331,11 @@ React 元素的事件处理和 DOM 元素的很相似，但是有一点语法上
     return <a onClick=(this.handleClick)>Click me</a>
   }
   ```
+
+## 文档
+
+[一网打尽 React 重难点](https://zhuanlan.zhihu.com/p/83079398)
+
+[你真的理解 setState 吗？](https://juejin.im/post/5b45c57c51882519790c7441#comment)
+
+[React源码解析](https://react.jokcy.me/)
