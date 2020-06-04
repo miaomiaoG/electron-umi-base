@@ -7,6 +7,7 @@
 在 React 中推荐使用 JSX，JSX 可以在 html 中插入 js 语句，在 html 的任何位置需要插入js时，插入一对大括号{}, 你可以在大括号{}中写入任何你需要的js代码，现在尝试在demo页面中使用JSX，eg:
 
 ```JSX
+import React from 'react';
 // ...
 render() {
     const name = 'minieye';
@@ -333,6 +334,8 @@ React 元素的事件处理和 DOM 元素的很相似，但是有一点语法上
   ```
 
 ## 文档
+
+[this in react](https://zhuanlan.zhihu.com/p/37911534)
 
 [一网打尽 React 重难点](https://zhuanlan.zhihu.com/p/83079398)
 

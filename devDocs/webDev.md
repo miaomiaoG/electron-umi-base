@@ -365,8 +365,6 @@ componentDidmount(){
 
 [ES6](https://es6.ruanyifeng.com/)
 
-[this in react](https://zhuanlan.zhihu.com/p/37911534)
-
 [你不知道的 JS](https://github.com/getify/You-Dont-Know-JS/tree/1ed-zh-CN)
 
 [css-modules(glenmaddern)](https://glenmaddern.com/articles/css-modules)
