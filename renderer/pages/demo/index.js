@@ -9,15 +9,28 @@ import styles from './index.less';
 export default class Demo extends React.PureComponent {
 
   constructor(props) {
-    super(props);
+    super(props); 
+    console.log(props);
     this.state = {
       name: 'minieye',
       count: 0,
     }
-    this.logCount();
+
+    // this.setState({count:169})
+
+    /* this.logCount();
+    const pro = new Promise((re,rj)=>{
+      re();
+    })
+    pro.then(()=>{
+      console.log('promise resolve')
+      this.setState({count:169})
+    }) */
   }
 
   componentDidMount() {
+    console.log('componentDidMount');
+
     /*  let count = 0;
      this.timer = setInterval(() => {
        console.log(count++);
@@ -25,6 +38,8 @@ export default class Demo extends React.PureComponent {
   }
 
   componentWillUnmount() {
+    console.log('componentWillUnmount');
+
     // clearInterval(this.timer)
   }
 
@@ -46,6 +61,7 @@ export default class Demo extends React.PureComponent {
   }
 
   render() {
+    console.log('render');
     const name = 'minieye';
     const array = [1, 2, 3, 4, 5];
 

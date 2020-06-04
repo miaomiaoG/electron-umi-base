@@ -1,4 +1,4 @@
-# React入门
+# React基础
 
 这里只做简单的介绍，及基本使用,更详细的文档请参考 [react.js](https://reactjs.org/docs/getting-started.html)
 
