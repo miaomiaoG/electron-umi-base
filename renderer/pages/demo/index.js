@@ -9,7 +9,7 @@ import styles from './index.less';
 export default class Demo extends React.PureComponent {
 
   constructor(props) {
-    super(props); 
+    super(props);
     console.log(props);
     this.state = {
       name: 'minieye',
@@ -57,18 +57,24 @@ export default class Demo extends React.PureComponent {
 
   toAnotherPage = () => {
     // 参数 page2 的路由
-    router.push('/page2');
+    router.push('/page2/123');
+  }
+
+  changeState = () => {
+    this.setState({ name: 'banboo' });
+    this.setState({name: 'panda'});
+    this.setState({name: 'cat'});
   }
 
   render() {
     console.log('render');
-    const name = 'minieye';
+    // const name = 'minieye';
     const array = [1, 2, 3, 4, 5];
 
     return (
       <div className={styles.demoPage}>
         <Card title="JSX">
-          <p>{`{${name}}`}</p>
+          <p onClick={this.changeState}>{`{${this.state.name}}`}</p>
             hello, {this.state.name}!  {/* 使用定义的变量 */}
           <ul>
             {
@@ -99,15 +105,15 @@ export default class Demo extends React.PureComponent {
 
         <br />
 
-        {/* <Card title="router">
+        <Card title="router">
           <Button onClick={this.toAnotherPage}>route to page2</Button>
-        </Card> */}
+        </Card> 
 
         <br />
 
-        {/* <Card title="component style" className={styles.myCard}>
+        <Card title="component style" className={styles.myCard}>
           Card Content
-        </Card> */}
+        </Card>
       </div>
     )
   }

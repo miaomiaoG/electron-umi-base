@@ -2,14 +2,14 @@
 
 这里只做简单的介绍，及基本使用,更详细的文档请参考 [react.js](https://reactjs.org/docs/getting-started.html)
 
-## JSX 语法
+## JSX
 
 在 React 中推荐使用 JSX，JSX 可以在 html 中插入 js 语句，在 html 的任何位置需要插入js时，插入一对大括号{}, 你可以在大括号{}中写入任何你需要的js代码，现在尝试在demo页面中使用JSX，eg:
 
 ```JSX
-import React from 'react';
+import React from 'react'; // 使用 JSX 必须引入
 // ...
-render() {
+function() {
     const name = 'minieye';
     const array = [1, 2, 3, 4, 5];
     return (
@@ -28,13 +28,22 @@ render() {
       </div>
     )
   }
+
+// eg:
+<Welcome name="minieye"/>
+// 编译后为
+React.createElement(
+  Welcome,
+  {name: 'minieye'}
+)
 //...
 ```
 
 注意：
 
+- JSX 仅仅只是 React.createElement(component, props, ...children) 函数的语法糖。
 - 注释：在JSX中使用注释时，需要先用大括号{}，然后使用js的注释方式即可(参考上面的代码注释)
-- `array.map(item=><li key={item}>{item}</li>)`，react遍历生成dom节点时，每个节点都要有唯一的key，不需要全局唯一，但要在当前列表唯一，参考文档 [Lists and keys](https://reactjs.org/docs/lists-and-keys.html)
+- `array.map(item=><li key={item}>{item}</li>)`，react遍历生成dom节点时，每个节点都要有唯一的key，不需要全局唯一，但要在当前列表唯一，不推荐使用数组下标作为唯一 key 值，原因参考文档 [Lists and keys](https://reactjs.org/docs/lists-and-keys.html)
 
 ## 组件 & props & state
 
@@ -129,6 +138,8 @@ render() {
   ```JSX
     // Wrong
     this.setState({name: 'banboo'});
+    // this.setState({name: 'panda'});
+    // this.setState({name: 'cat'});
     console.log(this.state.name) // log: 'minnieye'，而不是 'banboo'
   ```
 
@@ -313,7 +324,7 @@ React 元素的事件处理和 DOM 元素的很相似，但是有一点语法上
 
 - `this` 指向问题
   
-  `class` 的方法默认不会绑定 this。如果你忘记绑定 `this.handleClick` 并把它传入了 `onClick`，当你调用这个函数的时候 `this` 的值为 `undefined`。因此通常我们都使用箭头函数来处理事件函数，箭头函数默认将当前类的 `this` 绑定到了函数上。
+  `class` 的默认方法不会绑定 this。如果你忘记绑定 `this.handleClick` 并把它传入了 `onClick`，当你调用这个函数的时候 `this` 的值为 `undefined`。因此通常我们都使用箭头函数来处理事件函数，箭头函数默认将当前类的 `this` 绑定到了函数上。
   在 `class` 组件中，用默认方法处理之间函数时，也可以通过 `this` 绑定将 `this` 传入函数，这一步在 `constructor` 中进行，eg：
 
   ```jsx
